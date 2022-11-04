@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+; developed by @rlelito | version 1.0
+
+; any file or folder
+[- HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\GetCurrentDate]
+
+; background of a directory
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\GetCurrentDate]

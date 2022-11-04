@@ -1,0 +1,70 @@
+Windows Registry Editor Version 5.00
+; developed by @rlelito | version 2.1
+
+; Inspired by:
+; https://www.majorgeeks.com/content/page/how_to_add_or_remove_select_power_plan_context_menu_in_windows_10.html
+
+
+; desktop background / Context Menu - Power Saver
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan]
+"Icon"="powercpl.dll"
+"MUIVerb"="Power Plan"
+"Position"="Top"
+"SubCommands"=""
+
+
+; Plan - Power Saver
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\01]
+"MUIVerb"="Power Saver"
+"Icon"="powercpl.dll,1"
+
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\01\command]
+@="cmd /c powercfg /S a1841308-3541-4fab-bc81-f71556f20b4a & powercfg /getactivescheme | >nul findstr \"a1841308-3541-4fab-bc81-f71556f20b4a\" && REG ADD \"HKCU\\Software\\Classes\\DesktopBackground\\Shell\\PowerPlan\" /v \"Icon\" /d \"powercpl.dll,1\" /f"
+
+
+; Plan - Balanced
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\02]
+"MUIVerb"="Balanced"
+"Icon"="powercpl.dll,0"
+
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\02\command]
+@="cmd /c powercfg /S 381b4222-f694-41f0-9685-ff5bb260df2e & powercfg /getactivescheme | >nul findstr \"381b4222-f694-41f0-9685-ff5bb260df2e\" && REG ADD \"HKCU\\Software\\Classes\\DesktopBackground\\Shell\\PowerPlan\" /v \"Icon\" /d \"powercpl.dll,0\" /f"
+
+
+; Plan - High Performance
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\03]
+"MUIVerb"="High Performance"
+"Icon"="powercpl.dll,2"
+
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\03\command]
+@="cmd /c powercfg /S 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c & powercfg /getactivescheme | >nul findstr \"8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c\" && REG ADD \"HKCU\\Software\\Classes\\DesktopBackground\\Shell\\PowerPlan\" /v \"Icon\" /d \"powercpl.dll,2\" /f"
+
+
+; Plan - Ultimate Performance
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\04]
+"MUIVerb"="Ultimate Performance"
+"Icon"="shell32.dll,239"
+
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\04\command]
+@="cmd /c powercfg /S 38156909-5918-4777-864e-fbf99c75df8b & powercfg /getactivescheme | >nul findstr \"38156909-5918-4777-864e-fbf99c75df8b\" && REG ADD \"HKCU\\Software\\Classes\\DesktopBackground\\Shell\\PowerPlan\" /v \"Icon\" /d \"shell32.dll,239\" /f"
+
+
+; Turn Off Screen
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\05]
+"MUIVerb"="Turn Off Screen"
+"Icon"="powercpl.dll,4"
+"CommandFlags"=dword:00000020
+
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\05\command]
+@="cmd /c powershell (Add-Type '[DllImport(\\\"user32.dll\\\")]^public static extern int PostMessage(int hWnd, int hMsg, int wParam, int lParam);' -Name a -Pas)::PostMessage(-1,0x0112,0xF170,2)"
+; Script Source: https://gist.github.com/EugeneLoy/150044d04b08e35d09e164c864e78da7
+
+
+; Power Options
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\06]
+"MUIVerb"="Power Options"
+"Icon"="shell32.dll,21"
+"CommandFlags"=dword:00000020
+
+[HKEY_CURRENT_USER\Software\Classes\DesktopBackground\Shell\PowerPlan\shell\06\command]
+@="control.exe powercfg.cpl"

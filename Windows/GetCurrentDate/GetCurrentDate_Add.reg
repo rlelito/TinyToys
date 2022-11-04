@@ -1,0 +1,20 @@
+Windows Registry Editor Version 5.00
+; developed by @rlelito | version 1.0
+
+; any file or folder
+[HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\GetCurrentDate]
+@="Get Current Date"
+"Icon"="shell32.dll,260"
+
+[HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\GetCurrentDate\command]
+@="cmd.exe /c date /t | clip"
+
+
+; background of a directory
+[HKEY_CLASSES_ROOT\Directory\Background\shell\GetCurrentDate]
+@="Get Current Date"
+"Icon"="shell32.dll,260"
+"Position"="Top"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\GetCurrentDate\command]
+@="cmd.exe /c date /t | clip"
